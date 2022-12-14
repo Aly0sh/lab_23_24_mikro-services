@@ -3,13 +3,15 @@ package com.company.student.services;
 import com.company.student.models.Student;
 import com.company.student.repositories.StudentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
-@Service
-public class StudentService implements iService {
-    private StudentRepository studentRepository;
+import java.util.List;
 
+@Service
+@RequiredArgsConstructor
+public class StudentService implements iService {
+    private final StudentRepository studentRepository;
 
     @Override
     public void create(String fullName, int age, int course, String group) {
@@ -42,5 +44,10 @@ public class StudentService implements iService {
         if (studentRepository.findById(id).isPresent()) {
             studentRepository.delete(studentRepository.findById(id).get());
         }
+    }
+
+    @Override
+    public List<Student> getAll() {
+        return studentRepository.findAll();
     }
 }

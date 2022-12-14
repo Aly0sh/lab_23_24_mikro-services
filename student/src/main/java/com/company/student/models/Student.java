@@ -1,5 +1,7 @@
 package com.company.student.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
@@ -44,5 +46,25 @@ public class Student {
     public Student setGroup(String group) {
         this.group = group;
         return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }

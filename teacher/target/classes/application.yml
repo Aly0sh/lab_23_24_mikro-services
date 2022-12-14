@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: teacher
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/lab_23_24
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
 
 eureka:
   client:

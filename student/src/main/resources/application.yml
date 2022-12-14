@@ -8,10 +8,10 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/lab_23_student
+    url: jdbc:postgresql://localhost:5432/lab_23_24
     username: postgres
     password: root
     driverClassName: org.postgresql.Driver

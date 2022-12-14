@@ -1,7 +1,8 @@
-package com.company.student.controllers;
+package com.company.teacher.controllers;
 
-import com.company.student.services.StudentService;
+import com.company.teacher.services.TeacherService;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-public class StudentController {
-    private final StudentService studentService;
+public class TeacherController {
+    private final TeacherService teacherService;
 
     @GetMapping("/")
-    public String allStudents(Model model) {
-        model.addAttribute("students", studentService.getAll());
-        return "student";
+    public String allTeachers(Model model) {
+        model.addAttribute("teachers", teacherService.getAll());
+        return "teacher";
     }
 
     @GetMapping("/create")
@@ -28,23 +29,23 @@ public class StudentController {
     @PostMapping("/create")
     public String create(
             @RequestParam String fullName,
+            @RequestParam int salary,
             @RequestParam int age,
-            @RequestParam int course,
-            @RequestParam String group
+            @RequestParam String subject
     ) {
-        studentService.create(fullName, age, course, group);
+        teacherService.create(fullName, subject, age, salary);
         return "redirect:/";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id) {
-        studentService.delete(id);
+        teacherService.delete(id);
         return "redirect:/";
     }
 
     @GetMapping("/update/{id}")
     public String updatePage(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("student", studentService.read(id));
+        model.addAttribute("teacher", teacherService.read(id));
         return "update";
     }
 
@@ -53,10 +54,10 @@ public class StudentController {
             @PathVariable("id") Long id,
             @RequestParam String fullName,
             @RequestParam int age,
-            @RequestParam int course,
-            @RequestParam String group
+            @RequestParam int salary,
+            @RequestParam String subject
     ) {
-        studentService.update(id, fullName, age, course, group);
+        teacherService.update(id, fullName, subject, age, salary);
         return "redirect:/";
     }
 }
