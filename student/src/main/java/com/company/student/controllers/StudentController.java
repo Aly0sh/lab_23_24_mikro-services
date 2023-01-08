@@ -4,13 +4,12 @@ import com.company.student.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
 
@@ -26,20 +25,20 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public String create(
+    public RedirectView create(
             @RequestParam String fullName,
             @RequestParam int age,
             @RequestParam int course,
             @RequestParam String group
     ) {
         studentService.create(fullName, age, course, group);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/student/");
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public RedirectView delete(@PathVariable("id") Long id) {
         studentService.delete(id);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/student/");
     }
 
     @GetMapping("/update/{id}")
@@ -49,7 +48,7 @@ public class StudentController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(
+    public RedirectView update(
             @PathVariable("id") Long id,
             @RequestParam String fullName,
             @RequestParam int age,
@@ -57,6 +56,6 @@ public class StudentController {
             @RequestParam String group
     ) {
         studentService.update(id, fullName, age, course, group);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/student/");
     }
 }

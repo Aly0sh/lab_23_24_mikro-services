@@ -28,8 +28,8 @@
             <td>{{course}}</td>
             <td>{{group}}</td>
             <td>
-                <form action="/delete/{{id}}" method="post" class="btn-group" role="group">
-                    <a href="/update/{{id}}" class="btn btn-success">Update</a>
+                <form action="/student/delete/{{id}}" method="post" class="btn-group" role="group">
+                    <a href="/student/update/{{id}}" class="btn btn-success">Update</a>
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </td>
@@ -37,7 +37,7 @@
     {{/students}}
 </table>
 <p class="text-center">
-    <a href="/create" class="btn btn-primary mt-5">Add student</a>
+    <a href="/student/create" class="btn btn-primary mt-5">Add student</a>
 </p>
 </body>
 </html>

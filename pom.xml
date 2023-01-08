@@ -12,6 +12,7 @@
         <module>eureka-server</module>
         <module>student</module>
         <module>teacher</module>
+        <module>gateway</module>
     </modules>
 
     <properties>

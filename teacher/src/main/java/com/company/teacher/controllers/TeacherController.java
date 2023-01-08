@@ -2,16 +2,14 @@ package com.company.teacher.controllers;
 
 import com.company.teacher.services.TeacherService;
 import lombok.RequiredArgsConstructor;
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/teacher")
 public class TeacherController {
     private final TeacherService teacherService;
 
@@ -27,20 +25,20 @@ public class TeacherController {
     }
 
     @PostMapping("/create")
-    public String create(
+    public RedirectView create(
             @RequestParam String fullName,
             @RequestParam int salary,
             @RequestParam int age,
             @RequestParam String subject
     ) {
         teacherService.create(fullName, subject, age, salary);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/teacher/");
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public RedirectView delete(@PathVariable("id") Long id) {
         teacherService.delete(id);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/teacher/");
     }
 
     @GetMapping("/update/{id}")
@@ -50,7 +48,7 @@ public class TeacherController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(
+    public RedirectView update(
             @PathVariable("id") Long id,
             @RequestParam String fullName,
             @RequestParam int age,
@@ -58,6 +56,6 @@ public class TeacherController {
             @RequestParam String subject
     ) {
         teacherService.update(id, fullName, subject, age, salary);
-        return "redirect:/";
+        return new RedirectView("http://localhost:8090/teacher/");
     }
 }
