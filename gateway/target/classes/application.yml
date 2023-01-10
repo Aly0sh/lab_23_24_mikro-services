@@ -28,6 +28,10 @@ spring:
           uri: lb://teacher
           predicates:
             - Path=/teacher/**
+        - id: faculty
+          uri: lb://faculty
+          predicates:
+            - Path=/faculty/**
         - id: eureka-server
           uri: http://localhost:8761/
           predicates:

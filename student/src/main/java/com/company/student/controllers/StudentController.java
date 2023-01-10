@@ -1,5 +1,6 @@
 package com.company.student.controllers;
 
+import com.company.student.repositories.FacultyRepository;
 import com.company.student.services.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/student")
 public class StudentController {
     private final StudentService studentService;
+    private final FacultyRepository facultyRepository;
 
     @GetMapping("/")
     public String allStudents(Model model) {
@@ -20,7 +22,8 @@ public class StudentController {
     }
 
     @GetMapping("/create")
-    public String createPage() {
+    public String createPage(Model model) {
+        model.addAttribute("faculties", facultyRepository.findAll());
         return "create";
     }
 
@@ -29,9 +32,10 @@ public class StudentController {
             @RequestParam String fullName,
             @RequestParam int age,
             @RequestParam int course,
-            @RequestParam String group
+            @RequestParam String group,
+            @RequestParam Long faculty_id
     ) {
-        studentService.create(fullName, age, course, group);
+        studentService.create(fullName, age, course, group, faculty_id);
         return new RedirectView("http://localhost:8090/student/");
     }
 
@@ -44,6 +48,7 @@ public class StudentController {
     @GetMapping("/update/{id}")
     public String updatePage(Model model, @PathVariable("id") Long id) {
         model.addAttribute("student", studentService.read(id));
+        model.addAttribute("faculties", facultyRepository.findAll());
         return "update";
     }
 
@@ -53,9 +58,10 @@ public class StudentController {
             @RequestParam String fullName,
             @RequestParam int age,
             @RequestParam int course,
-            @RequestParam String group
+            @RequestParam String group,
+            @RequestParam Long faculty_id
     ) {
-        studentService.update(id, fullName, age, course, group);
+        studentService.update(id, fullName, age, course, group, faculty_id);
         return new RedirectView("http://localhost:8090/student/");
     }
 }

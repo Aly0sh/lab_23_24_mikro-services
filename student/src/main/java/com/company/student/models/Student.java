@@ -1,7 +1,5 @@
 package com.company.student.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
@@ -19,13 +17,17 @@ public class Student {
     @Column(name = "group_name")
     private String group;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Faculty faculty;
+
     public Student(){}
 
-    public Student(String fullName, int age, int course, String group) {
+    public Student(String fullName, int age, int course, String group, Faculty faculty) {
         this.fullName = fullName;
         this.age = age;
         this.course = course;
         this.group = group;
+        this.faculty = faculty;
     }
 
     public Student setFullName(String fullName) {
@@ -48,6 +50,11 @@ public class Student {
         return this;
     }
 
+    public Student setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
@@ -66,5 +73,9 @@ public class Student {
 
     public String getGroup() {
         return group;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
 }

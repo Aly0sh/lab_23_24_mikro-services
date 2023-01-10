@@ -1,9 +1,6 @@
 package com.company.teacher.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Teacher {
@@ -19,13 +16,17 @@ public class Teacher {
 
     private int salary;
 
+    @ManyToOne
+    private Faculty faculty;
+
     public Teacher() {}
 
-    public Teacher(String fullName, String subject, int age, int salary) {
+    public Teacher(String fullName, String subject, int age, int salary, Faculty faculty) {
         this.fullName = fullName;
         this.subject = subject;
         this.age = age;
         this.salary = salary;
+        this.faculty = faculty;
     }
 
     public Teacher setFullName(String fullName) {
@@ -46,5 +47,34 @@ public class Teacher {
     public Teacher setSalary(int salary) {
         this.salary = salary;
         return this;
+    }
+
+    public Teacher setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
 }

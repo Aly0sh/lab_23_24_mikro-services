@@ -17,6 +17,7 @@
         <th scope="col">Age</th>
         <th scope="col">Salary</th>
         <th scope="col">Subject</th>
+        <th scope="col">Faculty</th>
         <th scope="col">Operations</th>
     </tr>
 
@@ -27,6 +28,7 @@
             <td>{{age}}</td>
             <td>{{salary}}</td>
             <td>{{subject}}</td>
+            <td>{{faculty.name}}</td>
             <td>
                 <form action="/teacher/delete/{{id}}" method="post" class="btn-group" role="group">
                     <a href="/teacher/update/{{id}}" class="btn btn-success">Update</a>

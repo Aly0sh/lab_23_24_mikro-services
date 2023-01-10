@@ -1,9 +1,9 @@
 package com.company.student.services;
 
 import com.company.student.models.Student;
+import com.company.student.repositories.FacultyRepository;
 import com.company.student.repositories.StudentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +12,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService implements iService {
     private final StudentRepository studentRepository;
+    private final FacultyRepository facultyRepository;
 
     @Override
-    public void create(String fullName, int age, int course, String group) {
-        studentRepository.save(new Student(fullName, age, course, group));
+    public void create(String fullName, int age, int course, String group, Long faculty_id) {
+        studentRepository.save(new Student(fullName, age, course, group, facultyRepository.findById(faculty_id).get()));
     }
 
     @Override
@@ -27,14 +28,15 @@ public class StudentService implements iService {
     }
 
     @Override
-    public void update(Long id, String fullName, int age, int course, String group) {
-        if (studentRepository.findById(id).isPresent()) {
+    public void update(Long id, String fullName, int age, int course, String group, Long faculty_id) {
+        if (studentRepository.findById(id).isPresent() && facultyRepository.findById(faculty_id).isPresent()) {
             studentRepository.save(
                     studentRepository.findById(id).get()
                             .setFullName(fullName)
                             .setAge(age)
                             .setCourse(course)
                             .setGroup(group)
+                            .setFaculty(facultyRepository.findById(faculty_id).get())
             );
         }
     }

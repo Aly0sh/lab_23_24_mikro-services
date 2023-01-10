@@ -13,6 +13,8 @@
         <module>student</module>
         <module>teacher</module>
         <module>gateway</module>
+        <module>lesson</module>
+        <module>faculty</module>
     </modules>
 
     <properties>
@@ -61,6 +63,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mustache</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>

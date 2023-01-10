@@ -11,7 +11,11 @@
         <module name="eureka-server" />
         <module name="student" />
         <module name="gateway" />
+        <module name="faculty" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="lesson" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>
